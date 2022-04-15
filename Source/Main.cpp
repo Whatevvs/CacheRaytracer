@@ -1,6 +1,10 @@
 #include <SDL.h>
-#include "../Timer.h"
+#include "Timer.h"
 #include <iostream>
+
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_impl_sdl.h"
+#include "ImGui/imgui_impl_sdlrenderer.h"
 
 typedef uint32_t Pixel;
 
@@ -17,11 +21,29 @@ int main(int argc, char* args[])
 
 	Pixel* pixels = new Pixel[SCREEN_WIDTH * SCREEN_HEIGHT];
 
-	Timer timer;
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGui::StyleColorsDark();
+	ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+	ImGui_ImplSDLRenderer_Init(renderer);
 
+	Timer timer;
 	while (true)
 	{
 		static float x = 0.0f;
+
+		ImGui_ImplSDLRenderer_NewFrame();
+		ImGui_ImplSDL2_NewFrame();
+		ImGui::NewFrame();
+		ImGui::SetNextWindowPos(ImVec2(0, 0));
+		ImGui::SetNextWindowSize(ImVec2(250, 100));
+		ImGui::Begin("Test Window:", nullptr);
+		ImGui::Text("Hi Matt and Angel");
+		ImGui::Text("~Huge Stefan");
+		ImGui::Text("P.S. Matt make input work...");
+		ImGui::End();
+		ImGui::Render();
 
 		float s = (sinf(x += 0.03f) + 1.0f) * 0.5f;
 		Pixel p = (1.0f - s) * 10 + s * 250;
@@ -33,6 +55,9 @@ int main(int argc, char* args[])
 
 		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, frameBuffer, NULL, NULL);
+
+		ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+
 		SDL_RenderPresent(renderer);
 
 		printf("Frametime: %fs\n", timer.TimeSinceLast());
