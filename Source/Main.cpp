@@ -10,6 +10,8 @@ typedef uint32_t Pixel;
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+bool isApplicationRunning { true };
+
 int main(int argc, char* args[])
 {
 	SDL_Window* window = NULL;
@@ -29,8 +31,21 @@ int main(int argc, char* args[])
 	ImGui_ImplSDLRenderer_Init(renderer);
 
 	Timer timer;
-	while (true)
+	while (isApplicationRunning)
 	{
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) 
+		{
+			switch(event.type)
+			{
+			case SDL_QUIT:
+				isApplicationRunning = false;
+				break;
+			}
+
+			ImGui_ImplSDL2_ProcessEvent(&event);
+		}
+
 		static float x = 0.0f;
 
 		ImGui_ImplSDLRenderer_NewFrame();
@@ -42,6 +57,7 @@ int main(int argc, char* args[])
 		ImGui::Text("Hi Matt and Angel");
 		ImGui::Text("~Huge Stefan");
 		ImGui::Text("P.S. Matt make input work...");
+		ImGui::Text("P.P.S. Just did it ;)");
 		ImGui::End();
 		ImGui::Render();
 
