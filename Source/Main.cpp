@@ -8,6 +8,7 @@
 
 #include "../Style.h"
 #include "../AppWindow.h"
+#include "../CacheMath.h"
 
 typedef uint32_t Pixel;
 

@@ -34,4 +34,3 @@ public:
 
 	float GetDeltaTime() { return m_lastFrameTime; };
 };
-
