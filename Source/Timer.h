@@ -17,4 +17,5 @@ public:
 
     float TimeSinceStart();
     float TimeSinceLast();
+    float PeekTimeSinceLast();
 };

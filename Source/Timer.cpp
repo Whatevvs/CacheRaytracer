@@ -19,3 +19,8 @@ float Timer::TimeSinceLast()
 
     return timeDifference;
 }
+
+float Timer::PeekTimeSinceLast()
+{
+    return TimeSinceStart() - m_lastTime;
+}
