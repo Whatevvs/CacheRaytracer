@@ -32,5 +32,6 @@
 
 x64
 !/Dependencies/SDL2/lib/x64
+imgui.ini
 CacheRayTracer.pdb
 CacheRayTracer.vcxproj.user

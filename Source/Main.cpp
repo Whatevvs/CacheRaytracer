@@ -1,16 +1,13 @@
 #include <SDL.h>
-#include "Timer.h"
-#include <iostream>
+#include "Precomp.h"
 
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_sdlrenderer.h"
 
-#include "../Style.h"
-#include "../AppWindow.h"
-#include "../CacheMath.h"
-
-typedef uint32_t Pixel;
+#include "Style.h"
+#include "AppWindow.h"
+#include "Renderer.h"
 
 bool isApplicationRunning { true };
 AppWindow* window { nullptr };
@@ -28,6 +25,9 @@ int main(int argc, char* args[])
 
 	Style();
 
+	Renderer renderer;
+	renderer.Start(window->GetScreenBuffer());
+
 	while (isApplicationRunning)
 	{
 		SDL_Event event;
@@ -43,6 +43,7 @@ int main(int argc, char* args[])
 			ImGui_ImplSDL2_ProcessEvent(&event);
 		}
 
+		renderer.Update(window->GetDeltaTime());
 		window->Update();
 	}
 

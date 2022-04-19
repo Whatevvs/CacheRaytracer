@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 // #define NON_UNION_VEC
 
 #ifdef NON_UNION_VEC
@@ -79,6 +81,10 @@ struct Vector4
 
 struct Vector2
 {
+    Vector2() : x(0.0f), y(0.0f) {};
+    Vector2(float v) : x(v) {};
+    Vector2(float x, float y) : x(x), y(y) {};
+
     union
     {
         float vec[2];
@@ -89,21 +95,36 @@ struct Vector2
         };
     };
 
-    Vector2 operator+(const Vector2& other) { return {x + other.x, y + other.y}; };
-    Vector2 operator-(const Vector2& other) { return {x - other.x, y - other.y}; };
-    Vector2 operator*(const Vector2& other) { return {x * other.x, y * other.y}; };
-    Vector2 operator/(const Vector2& other) { return {x / other.x, y / other.y}; };
+    Vector2 operator+(const Vector2& other) const { return {x + other.x, y + other.y}; };
+    Vector2 operator-(const Vector2& other) const { return {x - other.x, y - other.y}; };
+    Vector2 operator*(const Vector2& other) const { return {x * other.x, y * other.y}; };
+    Vector2 operator/(const Vector2& other) const { return {x / other.x, y / other.y}; };
     Vector2& operator+=(const Vector2& rhs){ this->x += rhs.x; this->y += rhs.y; return *this; }
     Vector2& operator-=(const Vector2& rhs){ this->x -= rhs.x; this->y -= rhs.y; return *this; }
     Vector2& operator*=(const Vector2& rhs){ this->x *= rhs.x; this->y *= rhs.y; return *this; }
     Vector2& operator/=(const Vector2& rhs){ this->x /= rhs.x; this->y /= rhs.y; return *this; }
 
-    Vector2 operator*(const float& other) { return {x * other, y * other}; };
-    Vector2 operator/(const float& other) { float scalar = 1.0f / other; return {x * scalar, y * scalar}; };
+    Vector2 operator*(const float& other) const { return {x * other, y * other}; };
+    Vector2 operator/(const float& other) const { float scalar = 1.0f / other; return {x * scalar, y * scalar}; };
+
+    float SqrtLength() const { return (x * x + y * y); };
+    float Length() const { return sqrtf(SqrtLength()); };
+
+    void Normalize()
+    {
+        float invMag = 1.0f / Length();
+
+        x = x * invMag;
+        y = y * invMag;
+    }
 };
 
 struct Vector3
 {
+    Vector3() : x(0.0f), y(0.0f), z(0.0f), dummy(0.0f) {};
+    Vector3(float v) : x(v), y(v), z(v), dummy(0.0f) {};
+    Vector3(float x, float y, float z) : x(x), y(y), z(z), dummy(0.0f) {};
+
     union
     {
         float vec[4];
@@ -116,22 +137,37 @@ struct Vector3
         };
     };
 
-    Vector3 operator+(const Vector3& other) { return {x + other.x, y + other.y, z + other.z}; };
-    Vector3 operator-(const Vector3& other) { return {x - other.x, y - other.y, z - other.z}; };
-    Vector3 operator*(const Vector3& other) { return {x * other.x, y * other.y, z * other.z}; };
-    Vector3 operator/(const Vector3& other) { return {x / other.x, y / other.y, z / other.z}; };
+    Vector3 operator+(const Vector3& other) const { return {x + other.x, y + other.y, z + other.z}; };
+    Vector3 operator-(const Vector3& other) const { return {x - other.x, y - other.y, z - other.z}; };
+    Vector3 operator*(const Vector3& other) const { return {x * other.x, y * other.y, z * other.z}; };
+    Vector3 operator/(const Vector3& other) const { return {x / other.x, y / other.y, z / other.z}; };
     Vector3& operator+=(const Vector3& rhs){ this->x += rhs.x; this->y += rhs.y; this->z += rhs.z; return *this; }
     Vector3& operator-=(const Vector3& rhs){ this->x -= rhs.x; this->y -= rhs.y; this->z -= rhs.z; return *this; }
     Vector3& operator*=(const Vector3& rhs){ this->x *= rhs.x; this->y *= rhs.y; this->z *= rhs.z; return *this; }
     Vector3& operator/=(const Vector3& rhs){ this->x /= rhs.x; this->y /= rhs.y; this->z /= rhs.z; return *this; }
 
+    Vector3 operator*(const float& other) const { return {x * other, y * other, z * other}; };
+    Vector3 operator/(const float& other) const { float scalar = 1.0f / other; return {x * scalar, y * scalar, z * scalar}; };
 
-    Vector3 operator*(const float& other) { return {x * other, y * other, z * other}; };
-    Vector3 operator/(const float& other) { float scalar = 1.0f / other; return {x * scalar, y * scalar, z * scalar}; };
+    float SqrtLength() const { return (x * x + y * y + z * z); };
+    float Length() const { return sqrtf(SqrtLength()); };
+
+    void Normalize()
+    {
+        float invMag = 1.0f / Length();
+
+        x = x * invMag;
+        y = y * invMag;
+        z = z * invMag;
+    }
 };
 
 struct Vector4
 {
+    Vector4() : x(0.0f), y(0.0f), z(0.0f), w(0.0f) {};
+    Vector4(float v) : x(v), y(v), z(v), w(v) {};
+    Vector4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {};
+
     union
     {
         float vec[4];
@@ -144,20 +180,36 @@ struct Vector4
         };
     };
 
-    Vector4 operator+(const Vector4& other) { return {x + other.x, y + other.y, z + other.z, w + other.w}; };
-    Vector4 operator-(const Vector4& other) { return {x - other.x, y - other.y, z - other.z, w - other.w}; };
-    Vector4 operator*(const Vector4& other) { return {x * other.x, y * other.y, z * other.z, w * other.w}; };
-    Vector4 operator/(const Vector4& other) { return {x / other.x, y / other.y, z / other.z, w / other.w}; };
+    Vector4 operator+(const Vector4& other) const { return {x + other.x, y + other.y, z + other.z, w + other.w}; };
+    Vector4 operator-(const Vector4& other) const { return {x - other.x, y - other.y, z - other.z, w - other.w}; };
+    Vector4 operator*(const Vector4& other) const { return {x * other.x, y * other.y, z * other.z, w * other.w}; };
+    Vector4 operator/(const Vector4& other) const { return {x / other.x, y / other.y, z / other.z, w / other.w}; };
     Vector4& operator+=(const Vector4& rhs){ this->x += rhs.x; this->y += rhs.y; this->z += rhs.z; this->w += rhs.w; return *this; }
     Vector4& operator-=(const Vector4& rhs){ this->x -= rhs.x; this->y -= rhs.y; this->z -= rhs.z; this->w -= rhs.w; return *this; }
     Vector4& operator*=(const Vector4& rhs){ this->x *= rhs.x; this->y *= rhs.y; this->z *= rhs.z; this->w *= rhs.w; return *this; }
     Vector4& operator/=(const Vector4& rhs){ this->x /= rhs.x; this->y /= rhs.y; this->z /= rhs.z; this->w /= rhs.w; return *this; }
 
-    Vector4 operator*(const float& other) { return {x * other, y * other, z * other, w * other}; };
-    Vector4 operator/(const float& other) { float scalar = 1.0f / other; return {x * scalar, y * scalar, z * scalar, w * scalar}; };
+    Vector4 operator*(const float& other) const { return {x * other, y * other, z * other, w * other}; };
+    Vector4 operator/(const float& other) const { float scalar = 1.0f / other; return {x * scalar, y * scalar, z * scalar, w * scalar}; };
+
+    float SqrtLength() const { return (x * x + y * y + z * z + w * w); };
+    float Length() const { return sqrtf(SqrtLength()); };
+
+    void Normalize()
+    {
+        float invMag = 1.0f / Length();
+
+        x = x * invMag;
+        y = y * invMag;
+        z = z * invMag;
+        w = w * invMag;
+    }
 };
 
 #endif
+
+Vector3 normalize(const Vector3& vec);
+Vector4 normalize(const Vector4& vec);
 
 static_assert(sizeof(Vector2) ==  8, "Vector2 is wrong size.");
 static_assert(sizeof(Vector3) == 16, "Vector3 is wrong size.");

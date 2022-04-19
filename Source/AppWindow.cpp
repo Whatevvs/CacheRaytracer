@@ -37,12 +37,6 @@ AppWindow::~AppWindow()
 
 void AppWindow::Update()
 {
-	float i = 1.0f / RAND_MAX;
-
-	srand(0);
-	for (int i = 0; i < m_windowSize; i++)
-		m_buffer[i] = rand() * i * 0xffffffff;
-
 	Render();
 }
 

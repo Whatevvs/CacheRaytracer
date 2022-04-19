@@ -160,8 +160,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AppWindow.cpp" />
-    <ClCompile Include="CacheMath.cpp" />
+    <ClCompile Include="Source\Renderer.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\AABB.cpp" />
+    <ClCompile Include="Source\Primitive.cpp" />
+    <ClCompile Include="Source\AppWindow.cpp" />
+    <ClCompile Include="Source\CacheMath.cpp" />
     <ClCompile Include="Source\ImGui\imgui.cpp" />
     <ClCompile Include="Source\ImGui\imgui_demo.cpp" />
     <ClCompile Include="Source\ImGui\imgui_draw.cpp" />
@@ -173,8 +177,13 @@
     <ClCompile Include="Source\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AppWindow.h" />
-    <ClInclude Include="CacheMath.h" />
+    <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\AABB.h" />
+    <ClInclude Include="Source\Precomp.h" />
+    <ClInclude Include="Source\Primitive.h" />
+    <ClInclude Include="Source\AppWindow.h" />
+    <ClInclude Include="Source\CacheMath.h" />
     <ClInclude Include="Source\ImGui\imconfig.h" />
     <ClInclude Include="Source\ImGui\imgui.h" />
     <ClInclude Include="Source\ImGui\imgui_impl_sdl.h" />
@@ -183,8 +192,9 @@
     <ClInclude Include="Source\ImGui\imstb_rectpack.h" />
     <ClInclude Include="Source\ImGui\imstb_textedit.h" />
     <ClInclude Include="Source\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Source\Ray.h" />
     <ClInclude Include="Source\Timer.h" />
-    <ClInclude Include="Style.h" />
+    <ClInclude Include="Source\Style.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

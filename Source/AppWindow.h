@@ -1,9 +1,9 @@
 #pragma once
-#include "Dependencies/SDL2/include/SDL.h"
-#include "Source/ImGui/imgui.h"
-#include "Source/ImGui/imgui_impl_sdl.h"
-#include "Source/ImGui/imgui_impl_sdlrenderer.h"
-#include "Source/Timer.h"
+#include "SDL.h"
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_impl_sdl.h"
+#include "ImGui/imgui_impl_sdlrenderer.h"
+#include "Timer.h"
 #include "assert.h"
 
 typedef uint32_t Pixel;
@@ -33,4 +33,5 @@ public:
 	void Render();
 
 	float GetDeltaTime() { return m_lastFrameTime; };
+	Pixel* GetScreenBuffer() { return m_buffer; };
 };
