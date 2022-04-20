@@ -8,7 +8,7 @@ struct Ray;
 class Primitive
 {
 public: 
-	virtual bool HasHit(const Ray& ray, float tMin, float tMax) const = 0;
+	virtual float HasHit(const Ray& ray, float tMin, float tMax) const = 0;
 
 	unsigned int Color; // temporary for testing
 };

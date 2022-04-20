@@ -63,6 +63,9 @@
     <ClCompile Include="Source\ImGui\imgui_tables.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Timer.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Source\ImGui\imconfig.h">
       <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sphere.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

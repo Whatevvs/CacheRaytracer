@@ -9,7 +9,7 @@ AABB::AABB(const Vector3& position, const Vector3& size, unsigned int color)
     Color = color;
 }
 
-bool AABB::HasHit(const Ray& ray, float tMin, float tMax) const
+float AABB::HasHit(const Ray& ray, float tMin, float tMax) const
 {
     for (int a = 0; a < 3; a++)
     {
@@ -28,8 +28,8 @@ bool AABB::HasHit(const Ray& ray, float tMin, float tMax) const
         tMax = t1 < tMax ? t1 : tMax;
 
         if (tMax <= tMin)
-            return false;
+            return 0.0f;
     }
 
-    return true;
+    return tMin;
 }

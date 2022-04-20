@@ -174,6 +174,7 @@
     <ClCompile Include="Source\ImGui\imgui_tables.cpp" />
     <ClCompile Include="Source\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Sphere.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +194,7 @@
     <ClInclude Include="Source\ImGui\imstb_textedit.h" />
     <ClInclude Include="Source\ImGui\imstb_truetype.h" />
     <ClInclude Include="Source\Ray.h" />
+    <ClInclude Include="Source\Sphere.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\Style.h" />
   </ItemGroup>

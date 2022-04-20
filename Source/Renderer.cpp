@@ -1,6 +1,7 @@
 #include "Precomp.h"
 #include "Renderer.h"
 #include "AABB.h"
+#include "Sphere.h"
 
 void Renderer::Start(Pixel* screenBuffer)
 {
@@ -9,10 +10,12 @@ void Renderer::Start(Pixel* screenBuffer)
 	Primitive* testAABB = new AABB(Vector3(0.2f, 0.2f, -5.0f), Vector3(1.0f, 1.0f, 1.0f), 0xff0f0f);
 	Primitive* testAABB2 = new AABB(Vector3(-4.0f, 0.2f, -5.0f), Vector3(1.0f, 1.25f, 2.0f), 0x0fff0f);
 	Primitive* testAABB3 = new AABB(Vector3(2.5f, 1.2f, -5.0f), Vector3(1.0f, 0.25f, 1.0f), 0x0f0fff);
+	Primitive* testSphere = new Sphere(1.0f, Vector3(2.0f, -1.0f, -5.0f), 0xff0fff);
 
 	primitives.push_back(testAABB);
 	primitives.push_back(testAABB2);
 	primitives.push_back(testAABB3);
+	primitives.push_back(testSphere);
 
 	renderWidth = ScreenWidth;
 	renderHeight = renderWidth / camera.aspectRatio;
