@@ -1,5 +1,6 @@
 #include "AppWindow.h"
-#include <cstdlib>
+#include "Precomp.h"
+#include <cassert>
 
 AppWindow::AppWindow(bool closeWindow, int windowWidth, int windowHeight) :
 	m_windowWidth(windowWidth),
@@ -71,7 +72,7 @@ void AppWindow::DrawUI()
 
 	ImGuiWindowFlags flags{ 0 };
 
-#pragma region Performance Metrics Overlay
+#pragma region Performance_Metrics_Overlay
 	ImGui::SetNextWindowPos(ImVec2(5, m_windowHeight - 5), ImGuiCond_Always, { 0.0f, 1.0f });
 	ImGui::SetNextWindowBgAlpha(0.5f);
 
