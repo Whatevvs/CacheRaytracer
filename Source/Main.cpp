@@ -17,7 +17,7 @@ int main(int argc, char* args[])
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::StyleColorsDark();
 
-	window = new AppWindow(isApplicationRunning);
+	window = new AppWindow(isApplicationRunning, ScreenWidth, ScreenHeight);
 
 	Style();
 
@@ -26,6 +26,10 @@ int main(int argc, char* args[])
 
 	while (isApplicationRunning)
 	{
+		ImGui_ImplSDLRenderer_NewFrame();
+		ImGui_ImplSDL2_NewFrame();
+		ImGui::NewFrame();
+
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) 
 		{

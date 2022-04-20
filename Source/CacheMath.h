@@ -67,7 +67,6 @@ struct Vector3
             float z;
             float dummy;
         };
-        unsigned int full;
     };
 
     Vector3 operator+(const Vector3& other) const { return {x + other.x, y + other.y, z + other.z}; };
@@ -117,7 +116,6 @@ struct Vector4
             float z;
             float w;
         };
-        unsigned int full;
     };
 
     Vector4 operator+(const Vector4& other) const { return {x + other.x, y + other.y, z + other.z, w + other.w}; };

@@ -66,10 +66,6 @@ int frameTimeAverageStepIndex = 0;
 
 void AppWindow::DrawUI()
 {
-	ImGui_ImplSDLRenderer_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
-
 	ImGuiWindowFlags flags{ 0 };
 
 #pragma region Performance_Metrics_Overlay
