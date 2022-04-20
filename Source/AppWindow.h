@@ -1,10 +1,6 @@
 #pragma once
 #include "SDL.h"
-#include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_sdl.h"
-#include "ImGui/imgui_impl_sdlrenderer.h"
 #include "Timer.h"
-#include "assert.h"
 
 typedef uint32_t Pixel;
 

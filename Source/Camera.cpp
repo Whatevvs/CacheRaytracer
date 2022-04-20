@@ -43,9 +43,9 @@ Ray Camera::GeneratePinholeRay(float u, float v)
 	float y = (v * 2.0f) - 1.0f;
 	float theta = FOV * DegToRad;
 	float tanHalfAngle = tanf(theta * 0.5f);
-	float aspectScale = SCREEN_WIDTH;
-	vec2 pixel = vec2(x, y) * tanHalfAngle / aspectScale;
-	vec3 direction = vec3(pixel.x, pixel.y, -1);
+	float aspectScale = aspectRatio;
+	Vector2 pixel = Vector2(x, y) * tanHalfAngle / aspectScale;
+	Vector3 direction = Vector3(pixel.x, pixel.y, -1);
 
 	return Ray(cameraPosition, direction);*/
 

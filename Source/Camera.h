@@ -17,7 +17,7 @@ public:
 
 	float FOV = 90.0f; // amount of visible space measured in degrees
 	float focalLength = 1.0f; // distance between sensor and image plane/lens 
-	float aspectRatio = 16.0f / 9.0f; // determines the 
+	float aspectRatio = AspectRatio; // determines the aspect ratio
 
 	Vector3 cameraPosition;
 	Vector3 cameraHorizontal;

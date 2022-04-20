@@ -1,10 +1,6 @@
 #include <SDL.h>
 #include "Precomp.h"
 
-#include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_sdl.h"
-#include "ImGui/imgui_impl_sdlrenderer.h"
-
 #include "Style.h"
 #include "AppWindow.h"
 #include "Renderer.h"
