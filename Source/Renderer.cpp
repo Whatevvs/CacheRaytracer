@@ -21,19 +21,23 @@ void Renderer::Start(Pixel* screenBuffer)
 	renderHeight = renderWidth / camera.aspectRatio;
 }
 
+Vector3 sunPos{0,1,0};
+
 void Renderer::Update(float deltaTime)
 {
-	for (int x = 0; x < renderWidth; x++)
+	Pixel* buffer = screenBuffer;
+
+	for (int y = 0; y < renderHeight; y++)
 	{
-		for (int y = 0; y < renderHeight; y++)
+		for (int x = 0; x < renderWidth; x++)
 		{
 			int yPos = renderHeight - y - 1;
 
 			// Default to black
-			screenBuffer[x + yPos * renderWidth] = 0x000000;
+			buffer[0] = 0x000000;
 
 			float u = float(x) / (renderWidth - 1);
-			float v = float(y) / (renderHeight - 1);
+			float v = float(yPos) / (renderHeight - 1);
 
 			Ray ray = camera.GetRay(CameraType::Pinhole, u, v);
 
@@ -41,9 +45,19 @@ void Renderer::Update(float deltaTime)
 			{
 				if (primitives[i]->HasHit(ray, 0.1f, 10000.0f))
 				{
-					screenBuffer[x + yPos * renderWidth] = primitives[i]->Color;
+					buffer[0] = primitives[i]->Color;
 				}
 			}
+
+			if(!buffer[0])
+			{
+				Vector3 res = GeneratePixel(ray, x,y);
+				//printf("Res: %f %f %f\n", res.x, res.y ,res.z);
+				buffer[0] = (((int)(res.x * 255) << 16) + ((int)(res.y * 255) << 8) + (int)(res.z * 255));
+				//buffer[0] = 0x555599;
+			}
+
+			buffer++;
 		}
 	}
 }

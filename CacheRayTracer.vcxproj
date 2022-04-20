@@ -160,6 +160,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Atmosphere.cpp" />
     <ClCompile Include="Source\Renderer.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\AABB.cpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Source\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Atmosphere.h" />
     <ClInclude Include="Source\Renderer.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\AABB.h" />

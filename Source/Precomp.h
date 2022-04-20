@@ -13,6 +13,7 @@
 #include "Timer.h"
 #include "CacheMath.h"
 #include "Ray.h"
+#include "Atmosphere.h"
 
 typedef unsigned int Pixel;
 
