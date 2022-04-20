@@ -2,82 +2,7 @@
 
 #include <cmath>
 
-// #define NON_UNION_VEC
-
-#ifdef NON_UNION_VEC
-
-struct Vector2
-{
-    float vec[2];
-    float &x() { return vec[0]; }
-    float &y() { return vec[1]; }
-    const float &x() const { return vec[0]; }
-    const float &y() const { return vec[1]; }
-
-    Vector2 operator+(const Vector2& other) { return {vec[0] + other.vec[0], vec[1] + other.vec[1]}; };
-    Vector2 operator-(const Vector2& other) { return {vec[0] - other.vec[0], vec[1] - other.vec[1]}; };
-    Vector2 operator*(const Vector2& other) { return {vec[0] * other.vec[0], vec[1] * other.vec[1]}; };
-    Vector2 operator/(const Vector2& other) { return {vec[0] / other.vec[0], vec[1] / other.vec[1]}; };
-    Vector2& operator+=(const Vector2& rhs){ this->vec[0] += rhs.vec[0]; this->vec[1] += rhs.vec[1]; return *this; }
-    Vector2& operator-=(const Vector2& rhs){ this->vec[0] -= rhs.vec[0]; this->vec[1] -= rhs.vec[1]; return *this; }
-    Vector2& operator*=(const Vector2& rhs){ this->vec[0] *= rhs.vec[0]; this->vec[1] *= rhs.vec[1]; return *this; }
-    Vector2& operator/=(const Vector2& rhs){ this->vec[0] /= rhs.vec[0]; this->vec[1] /= rhs.vec[1]; return *this; }
-
-    Vector2 operator*(const float& other) { return {vec[0] * other, vec[1] * other}; };
-    Vector2 operator/(const float& other) { float scalar = 1.0f / other; return {vec[0] * scalar, vec[1] * scalar}; };
-};
-
-struct Vector3
-{
-    float vec[4];
-    float &x() { return vec[0]; }
-    float &y() { return vec[1]; }
-    float &z() { return vec[2]; }
-    float &dummy() { return vec[3]; }
-    const float &x() const { return vec[0]; }
-    const float &y() const { return vec[1]; }
-    const float &z() const { return vec[2]; }
-    const float &dummy() const { return vec[3]; }
-
-    Vector3 operator+(const Vector3& other) { return {vec[0] + other.vec[0], vec[1] + other.vec[1], vec[2] + other.vec[2]}; };
-    Vector3 operator-(const Vector3& other) { return {vec[0] - other.vec[0], vec[1] - other.vec[1], vec[2] - other.vec[2]}; };
-    Vector3 operator*(const Vector3& other) { return {vec[0] * other.vec[0], vec[1] * other.vec[1], vec[2] * other.vec[2]}; };
-    Vector3 operator/(const Vector3& other) { return {vec[0] / other.vec[0], vec[1] / other.vec[1], vec[2] / other.vec[2]}; };
-    Vector3& operator+=(const Vector3& rhs){ this->vec[0] += rhs.vec[0]; this->vec[1] += rhs.vec[1]; this->vec[2] += rhs.vec[2]; return *this; }
-    Vector3& operator-=(const Vector3& rhs){ this->vec[0] -= rhs.vec[0]; this->vec[1] -= rhs.vec[1]; this->vec[2] -= rhs.vec[2]; return *this; }
-    Vector3& operator*=(const Vector3& rhs){ this->vec[0] *= rhs.vec[0]; this->vec[1] *= rhs.vec[1]; this->vec[2] *= rhs.vec[2]; return *this; }
-    Vector3& operator/=(const Vector3& rhs){ this->vec[0] /= rhs.vec[0]; this->vec[1] /= rhs.vec[1]; this->vec[2] /= rhs.vec[2]; return *this; }
-
-
-    Vector3 operator*(const float& other) { return {vec[0] * other, vec[1] * other, vec[2] * other}; };
-    Vector3 operator/(const float& other) { float scalar = 1.0f / other; return {vec[0] * scalar, vec[1] * scalar, vec[2] * scalar}; };
-};
-
-struct Vector4
-{
-    float vec[4];
-    float &x() { return vec[0]; }
-    float &y() { return vec[1]; }
-    float &z() { return vec[2]; }
-    float &w() { return vec[3]; }
-    const float &x() const { return vec[0]; }
-    const float &y() const { return vec[1]; }
-    const float &z() const { return vec[2]; }
-    const float &w() const { return vec[3]; }
-
-    Vector4 operator+(const Vector4& other) { return {vec[0] + other.vec[0], vec[1] + other.vec[1], vec[2] + other.vec[2], vec[3] + other.vec[3]}; };
-    Vector4 operator-(const Vector4& other) { return {vec[0] - other.vec[0], vec[1] - other.vec[1], vec[2] - other.vec[2], vec[3] - other.vec[3]}; };
-    Vector4 operator*(const Vector4& other) { return {vec[0] * other.vec[0], vec[1] * other.vec[1], vec[2] * other.vec[2], vec[3] * other.vec[3]}; };
-    Vector4 operator/(const Vector4& other) { return {vec[0] / other.vec[0], vec[1] / other.vec[1], vec[2] / other.vec[2], vec[3] / other.vec[3]}; };
-    Vector4& operator+=(const Vector4& rhs){ this->vec[0] += rhs.vec[0]; this->vec[1] += rhs.vec[1]; this->vec[2] += rhs.vec[2]; this->vec[3] += rhs.vec[3]; return *this; }
-    Vector4& operator-=(const Vector4& rhs){ this->vec[0] -= rhs.vec[0]; this->vec[1] -= rhs.vec[1]; this->vec[2] -= rhs.vec[2]; this->vec[3] -= rhs.vec[3]; return *this; }
-    Vector4& operator*=(const Vector4& rhs){ this->vec[0] *= rhs.vec[0]; this->vec[1] *= rhs.vec[1]; this->vec[2] *= rhs.vec[2]; this->vec[3] *= rhs.vec[3]; return *this; }
-    Vector4& operator/=(const Vector4& rhs){ this->vec[0] /= rhs.vec[0]; this->vec[1] /= rhs.vec[1]; this->vec[2] /= rhs.vec[2]; this->vec[3] /= rhs.vec[3]; return *this; }
-
-    Vector4 operator*(const float& other) { return {vec[0] * other, vec[1] * other, vec[2] * other, vec[3] * other}; };
-    Vector4 operator/(const float& other) { float scalar = 1.0f / other; return {vec[0] * scalar, vec[1] * scalar, vec[2] * scalar, vec[3] * scalar}; };
-};
-#else
+const float PI = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170678214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038194428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141277245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116093305727036575959195309218611738193261179310511854807446237996274956735188575272489122793818301194919833673362440656643086021394946395224737190702179860943702770539217176293176752384674818467669405130005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589234201995611212902196086403441815981362977477130996051870721134999999837297804995105973173281609631855024459455346908302642522308253344685035261931188171010003137838752886587533208381420617177669147305982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989f;
 
 struct Vector2
 {
@@ -107,8 +32,15 @@ struct Vector2
     Vector2 operator*(const float& other) const { return {x * other, y * other}; };
     Vector2 operator/(const float& other) const { float scalar = 1.0f / other; return {x * scalar, y * scalar}; };
 
-    float SqrtLength() const { return (x * x + y * y); };
-    float Length() const { return sqrtf(SqrtLength()); };
+    float SqrLength() const { return (x * x + y * y); };
+    float Length() const { return sqrtf(SqrLength()); };
+    Vector2 Normalized() const 
+    { 
+        float invMag = 1.0f / Length();
+        Vector2 result = {x * invMag, y * invMag};
+        return result;
+    }
+
 
     void Normalize()
     {
@@ -135,6 +67,7 @@ struct Vector3
             float z;
             float dummy;
         };
+        unsigned int full;
     };
 
     Vector3 operator+(const Vector3& other) const { return {x + other.x, y + other.y, z + other.z}; };
@@ -149,8 +82,14 @@ struct Vector3
     Vector3 operator*(const float& other) const { return {x * other, y * other, z * other}; };
     Vector3 operator/(const float& other) const { float scalar = 1.0f / other; return {x * scalar, y * scalar, z * scalar}; };
 
-    float SqrtLength() const { return (x * x + y * y + z * z); };
-    float Length() const { return sqrtf(SqrtLength()); };
+    float SqrLength() const { return (x * x + y * y + z * z); };
+    float Length() const { return sqrtf(SqrLength()); };
+    Vector3 Normalized() const 
+    { 
+        float invMag = 1.0f / Length();
+        Vector3 result = {x * invMag, y * invMag, z * invMag};
+        return result;
+    }
 
     void Normalize()
     {
@@ -178,6 +117,7 @@ struct Vector4
             float z;
             float w;
         };
+        unsigned int full;
     };
 
     Vector4 operator+(const Vector4& other) const { return {x + other.x, y + other.y, z + other.z, w + other.w}; };
@@ -192,8 +132,14 @@ struct Vector4
     Vector4 operator*(const float& other) const { return {x * other, y * other, z * other, w * other}; };
     Vector4 operator/(const float& other) const { float scalar = 1.0f / other; return {x * scalar, y * scalar, z * scalar, w * scalar}; };
 
-    float SqrtLength() const { return (x * x + y * y + z * z + w * w); };
-    float Length() const { return sqrtf(SqrtLength()); };
+    float SqrLength() const { return (x * x + y * y + z * z + w * w); };
+    float Length() const { return sqrtf(SqrLength()); };
+    Vector4 Normalized() const 
+    { 
+        float invMag = 1.0f / Length();
+        Vector4 result = {x * invMag, y * invMag, z * invMag, w * invMag};
+        return result;
+    }
 
     void Normalize()
     {
@@ -206,10 +152,12 @@ struct Vector4
     }
 };
 
-#endif
+Vector3 Normalize(const Vector3& vec);
+Vector4 Normalize(const Vector4& vec);
 
-Vector3 normalize(const Vector3& vec);
-Vector4 normalize(const Vector4& vec);
+float Dot(const Vector2& a, const Vector3& b);
+float Dot(const Vector3& a, const Vector3& b);
+float Dot(const Vector4& a, const Vector4& b);
 
 static_assert(sizeof(Vector2) ==  8, "Vector2 is wrong size.");
 static_assert(sizeof(Vector3) == 16, "Vector3 is wrong size.");
