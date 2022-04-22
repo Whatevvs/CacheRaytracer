@@ -51,10 +51,8 @@ void Renderer::Update(float deltaTime)
 
 			if(!buffer[0])
 			{
-				Vector3 res = GeneratePixel(ray, x,y);
-				//printf("Res: %f %f %f\n", res.x, res.y ,res.z);
-				buffer[0] = (((int)(res.x * 255) << 16) + ((int)(res.y * 255) << 8) + (int)(res.z * 255));
-				//buffer[0] = 0x555599;
+				//Vector3 res = GeneratePixel(ray, x,y);
+				//buffer[0] = (((int)(res.x * 255) << 16) + ((int)(res.y * 255) << 8) + (int)(res.z * 255));
 			}
 
 			buffer++;

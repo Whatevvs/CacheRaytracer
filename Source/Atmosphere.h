@@ -101,8 +101,8 @@ static float g = 0.76f;
 static float gg = g * g;
 static float phaseRBase = 3.0f / (16.0f * PI);
 static float phaseMBase = 3.0f / (8.0f * PI);
-static uint32_t numSamples = 8; // 16
-static uint32_t numSamplesLight = 8; // 8 
+static uint32_t numSamples = 4; // 16
+static uint32_t numSamplesLight = 4; // 8 
 static int width = 1280;
 static int height = 720;
 
