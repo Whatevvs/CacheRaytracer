@@ -15,6 +15,7 @@
 #include "Ray.h"
 #include "Helper.h"
 #include "Atmosphere.h"
+#include "ImguiHandler.h"
 
 typedef unsigned int Pixel;
 

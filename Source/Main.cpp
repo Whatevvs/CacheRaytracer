@@ -12,13 +12,8 @@ int main(int argc, char* args[])
 {
 	// Initalize SDL and Dear ImGUI
 	SDL_Init(SDL_INIT_VIDEO);
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGui::StyleColorsDark();
 
 	window = new AppWindow(isApplicationRunning, ScreenWidth, ScreenHeight);
-
-	Style();
 	
 #ifdef _DEBUG
 	printf("Testing Screen Coordinate conversions\n");
@@ -44,12 +39,12 @@ int main(int argc, char* args[])
 	Renderer renderer;
 	renderer.Start(window->GetScreenBuffer());
 
+	ImguiHandler* imgui = ImguiHandler::GetInstance();
+	imgui->Initialize(window->GetSDLWindow(), window->GetSDLRenderer());
+	Style();
+
 	while (isApplicationRunning)
 	{
-		ImGui_ImplSDLRenderer_NewFrame();
-		ImGui_ImplSDL2_NewFrame();
-		ImGui::NewFrame();
-
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) 
 		{
@@ -62,6 +57,25 @@ int main(int argc, char* args[])
 
 			ImGui_ImplSDL2_ProcessEvent(&event);
 		}
+
+		imgui->Update();
+
+		// Example of imgui thingy
+		imgui->CreateWindow(Vector2(800, 20), Vector2(400, 200), "Hey Matt");
+		imgui->DrawText("Hey Matt", "This is an example wow");
+
+		// Instead of having to pass the "Window Name" of what you want to use, we can also activate a window 
+		// so you can have multiple calls, it's maybe a bit stupid.
+		// We should probably make the WindowName an enum instead
+		imgui->ActivateWindow("Hey Matt");
+		imgui->DrawText("\nThis window was activated so I can make multiple calls");
+		imgui->DrawText("More text...");
+		imgui->DrawText("More!");
+		imgui->DisableWindow();
+
+		// My idea is that we just we expand on this with whatever we need
+		// and it can act as our layer of interaction with ImGui, mainly making it
+		// easier to draw to windows from any place.
 
 		renderer.Update(window->GetDeltaTime());
 		window->Update();

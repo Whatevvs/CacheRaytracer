@@ -14,12 +14,10 @@ AppWindow::AppWindow(bool closeWindow, int windowWidth, int windowHeight) :
 	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	m_frameBufferTexture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, windowWidth, windowHeight);
 
-	// WINDOW SETUP : Initialize window and render with Dear ImGUI
-	ImGui_ImplSDL2_InitForSDLRenderer(m_window, m_renderer);
-	ImGui_ImplSDLRenderer_Init(m_renderer);
-
 	// WINDOW SETUP : Create pixel buffer we can write to
 	m_buffer = new Pixel[m_windowSize];
+
+	imguiHandler = ImguiHandler::GetInstance();
 
 #ifdef _DEBUG
 	assert(m_window != nullptr);
@@ -45,12 +43,12 @@ void AppWindow::Render()
 {
 	SDL_UpdateTexture(m_frameBufferTexture, NULL, m_buffer, m_windowWidth * sizeof(uint32_t));
 
-	DrawUI();
-
 	SDL_SetRenderDrawColor(m_renderer, 255, 0, 255, 255);
 	SDL_RenderClear(m_renderer);
 	SDL_RenderCopy(m_renderer, m_frameBufferTexture, NULL, NULL);
-	ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+
+	DrawUI();
+
 	SDL_RenderPresent(m_renderer);
 }
 
@@ -105,7 +103,5 @@ void AppWindow::DrawUI()
 	ImGui::End();
 #pragma endregion
 
-	//ImGui::ShowDemoWindow();
-
-	ImGui::Render();
+	imguiHandler->Draw();
 }

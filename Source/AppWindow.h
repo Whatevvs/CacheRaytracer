@@ -3,6 +3,7 @@
 #include "Timer.h"
 
 typedef uint32_t Pixel;
+class ImguiHandler;
 
 class AppWindow
 {
@@ -14,6 +15,7 @@ class AppWindow
 	const int m_windowHeight { 720 };
 	const int m_windowSize { 1280 * 720 };
 
+	ImguiHandler* imguiHandler;
 	Timer* m_timer { nullptr };
 	Pixel* m_buffer { nullptr };
 	bool& m_closeWindow;
@@ -30,4 +32,6 @@ public:
 
 	float GetDeltaTime() { return m_lastFrameTime; };
 	Pixel* GetScreenBuffer() { return m_buffer; };
+	SDL_Window* GetSDLWindow() { return m_window; };
+	SDL_Renderer* GetSDLRenderer() { return m_renderer; };
 };

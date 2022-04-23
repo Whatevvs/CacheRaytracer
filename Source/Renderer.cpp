@@ -39,7 +39,6 @@ int currentCamera;
 
 void Renderer::DrawUI()
 {
-	ImGui::ShowDemoWindow();
 	ImGui::Begin("Camera Options");
 	
 	    if (ImGui::Button("Camera Lens"))
