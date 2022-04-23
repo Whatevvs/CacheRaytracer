@@ -202,6 +202,9 @@
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\Style.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="FiraSans-Regular.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

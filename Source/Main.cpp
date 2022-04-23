@@ -14,14 +14,12 @@ int main(int argc, char* args[])
 	SDL_Init(SDL_INIT_VIDEO);
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::StyleColorsDark();
 
 	window = new AppWindow(isApplicationRunning, ScreenWidth, ScreenHeight);
 
 	Style();
 	
-
 #ifdef _DEBUG
 	printf("Testing Screen Coordinate conversions\n");
 	printf("-------------------------------------\n");

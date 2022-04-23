@@ -2,6 +2,9 @@
 
 void Style()
 {
+	auto io = ImGui::GetIO();
+	auto font = io.Fonts->AddFontFromFileTTF("C:/Users/Matt/Documents/GitHub/CacheRaytracer/FiraSans-Regular.ttf",18);
+
 	ImVec4* colors = ImGui::GetStyle().Colors;
 
 	colors[ImGuiCol_Text]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);

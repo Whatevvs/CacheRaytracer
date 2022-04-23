@@ -6,7 +6,6 @@ Sphere::Sphere(float radius, const Vector3& position, unsigned int color)
 	m_position(position),
 	m_radiusSquared(radius* radius)
 {
-
 	Color = color;
 }
 

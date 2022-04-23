@@ -30,14 +30,14 @@ ScreenPos_Pixel::ScreenPos_Pixel(int xin, int yin) :
 
 // -1.0 to 1.0 -> 1920 x 1080
 ScreenPos_Pixel::ScreenPos_Pixel(const ScreenPos_NDC& in) : 
-	x((in.x * ScreenWidth) + (ScreenWidth * 0.5f)),
-	y((in.y * ScreenHeight) + (ScreenHeight * 0.5f))
+	x((in.x * static_cast<float>(ScreenWidth)) + (static_cast<float>(ScreenWidth) * 0.5f)),
+	y((in.y * static_cast<float>(ScreenHeight)) + (static_cast<float>(ScreenHeight) * 0.5f))
 {};
 
 // 0.0 to 1.0 -> 1920 x 1080
 ScreenPos_Pixel::ScreenPos_Pixel(const ScreenPos_UV& in) : 
-	x(in.u * ScreenWidth),
-	y(in.v * ScreenHeight)
+	x(in.u * static_cast<float>(ScreenWidth)),
+	y(in.v * static_cast<float>(ScreenHeight))
 {};
 
 

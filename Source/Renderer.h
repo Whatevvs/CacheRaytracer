@@ -10,6 +10,7 @@ class Renderer
 {
 public:
 	void Start(Pixel* screenBuffer);
+	void DrawUI();
 	void Update(float deltaTime);
 
 private:

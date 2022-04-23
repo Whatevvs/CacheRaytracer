@@ -21,10 +21,50 @@ void Renderer::Start(Pixel* screenBuffer)
 	renderHeight = renderWidth / camera.aspectRatio;
 }
 
+
+std::string cameraTypes[] = 
+{
+"Pinhole lens",
+"Thin lens",
+"Generalized Panini lens",
+"Fisheye lens",
+"Lenslet / Microlens Array",
+"Octahedral lens",
+"Cube map",
+"Orthographic lens",
+"Fibonacci sphere lens"
+};
+
+int currentCamera;
+
+void Renderer::DrawUI()
+{
+	ImGui::ShowDemoWindow();
+	ImGui::Begin("Camera Options");
+	
+	    if (ImGui::Button("Camera Lens"))
+        ImGui::OpenPopup("CameraLensPopup");
+    ImGui::SameLine();
+    ImGui::TextUnformatted((std::string("Current: ") + (currentCamera == -1 ? "<None>" : cameraTypes[currentCamera])).c_str());
+    if (ImGui::BeginPopup("CameraLensPopup"))
+    {
+        ImGui::Text("Select Camera Lens");
+        ImGui::Separator();
+        for (int i = 0; i < IM_ARRAYSIZE(cameraTypes); i++)
+            if (ImGui::Selectable(cameraTypes[i].c_str()))
+                currentCamera = i;
+        ImGui::EndPopup();
+    }
+
+	ImGui::End();
+}
+
 Vector3 sunPos{0,1,0};
 
 void Renderer::Update(float deltaTime)
 {
+	DrawUI();
+
 	Pixel* buffer = screenBuffer;
 
 	for (int y = 0; y < renderHeight; y++)
