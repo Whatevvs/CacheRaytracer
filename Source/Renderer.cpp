@@ -41,10 +41,12 @@ void Renderer::DrawUI()
 {
 	ImGui::Begin("Camera Options");
 	
-	    if (ImGui::Button("Camera Lens"))
+	if (ImGui::Button("Camera Lens"))
         ImGui::OpenPopup("CameraLensPopup");
+
     ImGui::SameLine();
     ImGui::TextUnformatted((std::string("Current: ") + (currentCamera == -1 ? "<None>" : cameraTypes[currentCamera])).c_str());
+
     if (ImGui::BeginPopup("CameraLensPopup"))
     {
         ImGui::Text("Select Camera Lens");
@@ -54,6 +56,8 @@ void Renderer::DrawUI()
                 currentCamera = i;
         ImGui::EndPopup();
     }
+	ImGui::SetNextItemWidth(128);
+	ImGui::SliderFloat("Field of View (Horizontal)", &camera.cameraFOV,1.0f,180.0f);
 
 	ImGui::End();
 }
@@ -78,8 +82,11 @@ void Renderer::Update(float deltaTime)
 			float u = float(x) / (renderWidth - 1);
 			float v = float(yPos) / (renderHeight - 1);
 
-			Ray ray = camera.GetRay(CameraType::Pinhole, {u, v});
+			Ray ray = camera.GetRay((CameraType)currentCamera, {u, v});
 
+			if(ray.direction.SqrLength() == 0)
+				buffer[0] = 0xff0000;
+			else
 			for (int i = 0; i < primitives.size(); i++)
 			{
 				if (primitives[i]->HasHit(ray, 0.1f, 10000.0f))

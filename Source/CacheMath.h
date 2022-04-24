@@ -160,3 +160,5 @@ float Dot(const Vector4& a, const Vector4& b);
 static_assert(sizeof(Vector2) ==  8, "Vector2 is wrong size.");
 static_assert(sizeof(Vector3) == 16, "Vector3 is wrong size.");
 static_assert(sizeof(Vector4) == 16, "Vector4 is wrong size.");
+
+inline float Lerp(float a, float b, float t) {return (a * (1.0f - t) + b * t);}
