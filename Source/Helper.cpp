@@ -40,7 +40,6 @@ ScreenPos_Pixel::ScreenPos_Pixel(const ScreenPos_UV& in) :
 	y(in.v * static_cast<float>(ScreenHeight))
 {};
 
-
 /* ---- UV SCREEN POS ---- */
 
 // 0.0 to 1.0 -> 0.0 to 1.0

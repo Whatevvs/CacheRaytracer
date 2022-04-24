@@ -24,9 +24,9 @@ void Renderer::Start(Pixel* screenBuffer)
 
 std::string cameraTypes[] = 
 {
-"Pinhole lens",
+"Pinhole",
 "Thin lens",
-"Generalized Panini lens",
+"Generalized Panini",
 "Fisheye lens",
 "Lenslet / Microlens Array",
 "Octahedral lens",
@@ -78,7 +78,7 @@ void Renderer::Update(float deltaTime)
 			float u = float(x) / (renderWidth - 1);
 			float v = float(yPos) / (renderHeight - 1);
 
-			Ray ray = camera.GetRay(CameraType::Pinhole, u, v);
+			Ray ray = camera.GetRay(CameraType::Pinhole, {u, v});
 
 			for (int i = 0; i < primitives.size(); i++)
 			{

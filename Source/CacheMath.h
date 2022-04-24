@@ -7,7 +7,7 @@ const float PI = 3.1415926535897932384626433832795028841971693993751058209749445
 struct Vector2
 {
     Vector2() : x(0.0f), y(0.0f) {};
-    Vector2(float v) : x(v) {};
+    Vector2(float v) : x(v), y(v) {};
     Vector2(float x, float y) : x(x), y(y) {};
 
     union

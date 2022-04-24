@@ -22,21 +22,21 @@ void Camera::UpdateCameraSettings()
 	lowerLeftCorner = cameraPosition - cameraHorizontal * 0.5f - cameraVertical * 0.5f - Vector3(0.0f, 0.0f, focalLength);
 }
 
-Ray Camera::GetRay(CameraType type, float u, float v)
+Ray Camera::GetRay(CameraType type, ScreenPos_UV uv)
 {
 	Ray primitiveRay;
 
 	switch (type)
 	{
 	case CameraType::Pinhole:
-		primitiveRay = GeneratePinholeRay(u, v);
+		primitiveRay = GetPinholeRay(uv);
 		break;
 	}
 
 	return primitiveRay;
 }
 
-Ray Camera::GeneratePinholeRay(float u, float v)
+Ray Camera::GetPinholeRay(ScreenPos_UV uv)
 {
 	// RTG2 Pinhole ray gen
 	/*float x = (u * 2.0f) - 1.0f;
