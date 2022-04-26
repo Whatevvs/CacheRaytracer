@@ -12,6 +12,7 @@ public:
 	void Start(Pixel* screenBuffer);
 	void DrawUI();
 	void Update(float deltaTime);
+	void CalculateShading(Pixel* pixel, const Ray& ray);
 
 private:
 	Pixel* screenBuffer;
@@ -21,5 +22,8 @@ private:
 	// Width/Height from our actual 'rendered' image, determined by the camera FOV
 	int renderWidth;
 	int renderHeight;
+
+	float tMin = 0.01f;
+	float tMax = 3.40282e+038;
 };
 

@@ -9,7 +9,7 @@ AABB::AABB(const Vector3& position, const Vector3& size, unsigned int color)
     Color = color;
 }
 
-float AABB::HasHit(const Ray& ray, float tMin, float tMax) const
+float AABB::HasHit(const Ray& ray, float tMin, float tMax, HitRecord& record) const
 {
     for (int a = 0; a < 3; a++)
     {

@@ -4,9 +4,9 @@
 class Sphere : public Primitive
 {
 public:
-	Sphere(float radius, const Vector3& position, unsigned int color);
+	Sphere(float radius, const Vector3& position, Vector3 color);
 
-	virtual float HasHit(const Ray& ray, float tMin, float tMax) const override;
+	virtual float HasHit(const Ray& ray, float tMin, float tMax, HitRecord& record) const override;
 
 	float m_radius;
 	Vector3 m_position;

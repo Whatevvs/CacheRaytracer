@@ -3,18 +3,25 @@
 #include "AABB.h"
 #include "Sphere.h"
 
+Pixel VecToPixel(Vector3 color)
+{
+	color.x = sqrtf(color.x);
+	color.y = sqrtf(color.y);
+	color.z = sqrtf(color.z);
+
+	unsigned int r = (int)(255.0f * color.x);
+	unsigned int g = (int)(255.0f * color.y);
+	unsigned int b = (int)(255.0f * color.z);
+
+	return (r << 16) + (g << 8) + b;
+}
+
 void Renderer::Start(Pixel* screenBuffer)
 {
 	this->screenBuffer = screenBuffer;
 
-	Primitive* testAABB = new AABB(Vector3(0.2f, 0.2f, -5.0f), Vector3(1.0f, 1.0f, 1.0f), 0xff0f0f);
-	Primitive* testAABB2 = new AABB(Vector3(-4.0f, 0.2f, -5.0f), Vector3(1.0f, 1.25f, 2.0f), 0x0fff0f);
-	Primitive* testAABB3 = new AABB(Vector3(2.5f, 1.2f, -5.0f), Vector3(1.0f, 0.25f, 1.0f), 0x0f0fff);
-	Primitive* testSphere = new Sphere(1.0f, Vector3(2.0f, -1.0f, -5.0f), 0xff0fff);
+	Primitive* testSphere = new Sphere(1.0f, Vector3(2.0f, -1.0f, -5.0f), Vector3(1.0f, 0.0f, 0.0f));
 
-	primitives.push_back(testAABB);
-	primitives.push_back(testAABB2);
-	primitives.push_back(testAABB3);
 	primitives.push_back(testSphere);
 
 	renderWidth = ScreenWidth;
@@ -68,7 +75,7 @@ void Renderer::Update(float deltaTime)
 {
 	DrawUI();
 
-	Pixel* buffer = screenBuffer;
+	Pixel* pixel = screenBuffer;
 
 	for (int y = 0; y < renderHeight; y++)
 	{
@@ -77,31 +84,49 @@ void Renderer::Update(float deltaTime)
 			int yPos = renderHeight - y - 1;
 
 			// Default to black
-			buffer[0] = 0x000000;
+			pixel[0] = 0x000000;
 
 			float u = float(x) / (renderWidth - 1);
 			float v = float(yPos) / (renderHeight - 1);
 
 			Ray ray = camera.GetRay((CameraType)currentCamera, {u, v});
 
-			if(ray.direction.SqrLength() == 0)
-				buffer[0] = 0xff0000;
+			if (ray.direction.SqrLength() == 0)
+			{
+				pixel[0] = 0xff0000;
+			}
 			else
-			for (int i = 0; i < primitives.size(); i++)
 			{
-				if (primitives[i]->HasHit(ray, 0.1f, 10000.0f))
-				{
-					buffer[0] = primitives[i]->Color;
-				}
+				CalculateShading(pixel, ray);
 			}
-
-			if(!buffer[0])
-			{
-				//Vector3 res = GeneratePixel(ray, x,y);
-				//buffer[0] = (((int)(res.x * 255) << 16) + ((int)(res.y * 255) << 8) + (int)(res.z * 255));
-			}
-
-			buffer++;
+			
+			pixel++;
 		}
 	}
+}
+
+void Renderer::CalculateShading(Pixel* pixel, const Ray& ray)
+{
+	HitRecord record;
+	bool hitAnything = false;
+	float closestMax = tMax;
+
+	// Find nearest hit
+	for (int i = 0; i < primitives.size(); i++)
+	{
+		if (primitives[i]->HasHit(ray, tMin, closestMax, record))
+		{
+			hitAnything = true;
+			closestMax = record.t;
+		}
+	}
+
+	if (!hitAnything)
+	{
+		// replace with background
+		pixel[0] = 0x00000;
+		return;
+	}
+
+	pixel[0] = VecToPixel((record.normal + 1.0f) * 0.5f);
 }

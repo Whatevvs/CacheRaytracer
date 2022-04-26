@@ -53,6 +53,13 @@ int main(int argc, char* args[])
 			case SDL_QUIT:
 				isApplicationRunning = false;
 				break;
+
+			case SDL_KEYDOWN:
+				if (event.key.keysym.sym == SDLK_ESCAPE)
+				{
+					isApplicationRunning = false;
+				}
+				break;
 			}
 
 			ImGui_ImplSDL2_ProcessEvent(&event);
