@@ -74,3 +74,15 @@ void ImguiHandler::DrawText(std::string windowName, std::string text)
 	ImGui::Text(text.c_str());
 	ImGui::End();
 }
+
+void ImguiHandler::SliderFloat(std::string name, float& value, float min, float max)
+{
+	ImGui::SliderFloat(name.c_str(), &value, min, max, "%.1f");
+}
+
+void ImguiHandler::SliderFloat(std::string windowName, std::string name, float& value, float min, float max)
+{
+	ImGui::Begin(windowName.c_str(), nullptr);
+	ImGui::SliderFloat(name.c_str(), &value, min, max, "%.1f");
+	ImGui::End();
+}

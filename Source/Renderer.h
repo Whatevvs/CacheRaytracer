@@ -25,5 +25,6 @@ private:
 
 	float tMin = 0.01f;
 	float tMax = 3.40282e+038;
+	float lightX = 0.0f;
 };
 
