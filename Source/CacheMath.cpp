@@ -28,3 +28,10 @@ float Dot(const Vector4& a, const Vector4& b)
 {
 	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w));
 }
+
+float Clamp(float v, float min, float max)
+{
+	if (v < min) return min;
+	if (v > max) return max;
+	return v;
+}

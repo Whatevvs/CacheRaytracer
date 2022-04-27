@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <iostream>
 #include <limits>
+#include <string>
 
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_sdl.h"

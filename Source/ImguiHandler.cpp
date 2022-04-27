@@ -86,3 +86,27 @@ void ImguiHandler::SliderFloat(std::string windowName, std::string name, float& 
 	ImGui::SliderFloat(name.c_str(), &value, min, max, "%.1f");
 	ImGui::End();
 }
+
+void ImguiHandler::SliderVector3(std::string name, Vector3& value, float min, float max)
+{
+	ImGui::SliderFloat3(name.c_str(), &value.x, min, max, "%.1f");
+}
+
+void ImguiHandler::SliderVector3(std::string windowName, std::string name, Vector3& value, float min, float max)
+{
+	ImGui::Begin(windowName.c_str(), nullptr);
+	ImGui::SliderFloat3(name.c_str(), &value.x, min, max, "%.1f");
+	ImGui::End();
+}
+
+void ImguiHandler::InputVector3(std::string name, Vector3& value)
+{
+	ImGui::InputFloat3(name.c_str(), &value.x, "%.1f");
+}
+
+void ImguiHandler::InputVector3(std::string windowName, std::string name, Vector3& value)
+{
+	ImGui::Begin(windowName.c_str(), nullptr);
+	ImGui::DragFloat3(name.c_str(), &value.x);
+	ImGui::End();
+}

@@ -3,6 +3,7 @@
 #include "Camera.h"
 
 class Primitive;
+class Light;
 
 // Idea/Concept: contains/manages the output of the ray tracer
 // So things like the framebuffer and camera are updated "in" here, 
@@ -18,6 +19,7 @@ private:
 	Pixel* screenBuffer;
 	Camera camera;
 	std::vector<Primitive*> primitives;
+	std::vector<Light*> lightSources;
 
 	// Width/Height from our actual 'rendered' image, determined by the camera FOV
 	int renderWidth;
@@ -25,6 +27,5 @@ private:
 
 	float tMin = 0.01f;
 	float tMax = 3.40282e+038;
-	float lightX = 0.0f;
 };
 

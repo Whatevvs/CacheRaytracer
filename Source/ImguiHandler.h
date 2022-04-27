@@ -25,6 +25,12 @@ public:
 
 	void SliderFloat(std::string name, float& value, float min, float max);
 	void SliderFloat(std::string windowName, std::string name, float& value, float min, float max);
+	void SliderVector3(std::string name, Vector3& value, float min, float max);
+	void SliderVector3(std::string windowName, std::string name, Vector3& value, float min, float max);
+
+	void InputVector3(std::string name, Vector3& value);
+	void InputVector3(std::string windowName, std::string name, Vector3& value);
+
 
 private:
 	SDL_Window* window;
