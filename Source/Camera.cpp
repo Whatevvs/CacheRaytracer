@@ -74,7 +74,23 @@ Ray Camera::GetThinLensRay(ScreenPos_UV uv)
 
 Ray Camera::GetGeneralisedPaniniRay(ScreenPos_Pixel pixel)
 {
-	return {0,0};
+	 Vector2 pixelCenterCoords = Vector2(pixel.x,pixel.y) + Vector2(0.5f) - ScreenSizeHalf;
+	 Vector2 hv = (pixelCenterCoords / ScreenSizeHalf) * (cameraFOV * 0.5f);
+	
+	 float halfFOV = cameraFOV * 0.5f;
+	 float halfPaniniFOV = atan2f(sin(halfFOV), cos(halfFOV) + paniniDistance);
+	
+	 hv *= halfPaniniFOV;
+	
+	 float M = sqrtf(1.0f - (sinf(hv.x * sinf(hv.x) * paniniDistance))) + paniniDistance * cosf(hv.x);
+	
+	 float x = (sin(hv.x) * M);
+	 float z = (cos(hv.x) * M) - paniniDistance;
+	 float y = Lerp(tan(hv.y) * (1 + z), tan(hv.y) * z, paniniVerticalCompression);
+	
+	 Vector3 direction = Vector3(x, y, -z).Normalized();
+	
+	 return Ray(Vector3(0.0f), direction);
 }
 
 Ray Camera::GetFisheyeRay(ScreenPos_Pixel pixel)

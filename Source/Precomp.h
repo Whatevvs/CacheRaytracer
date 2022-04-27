@@ -23,6 +23,8 @@ typedef unsigned int Pixel;
 
 constexpr int ScreenWidth = 1280;
 constexpr int ScreenHeight = 720;
+const Vector2 ScreenSize = {ScreenWidth, ScreenHeight};
+const Vector2 ScreenSizeHalf = {ScreenWidth >> 1, ScreenHeight >> 1};
 constexpr float AspectRatio = static_cast<float>(ScreenWidth) / static_cast<float>(ScreenHeight);
 
 #ifdef HIGH_PRECISION_PI

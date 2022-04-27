@@ -27,6 +27,15 @@ public:
 	float focalLength = 1.0f; // distance between sensor and image plane/lens 
 	float aspectRatio = AspectRatio; // determines the aspect ratio
 
+	// Center of projection from cylinder to plane,
+	// can be any positive number
+	float paniniDistance;
+	
+	// 0-1 value to force straightening of horizontal lines
+	// (0 = no straightening , 1 = full straightening)
+	float paniniVerticalCompression;
+
+
 	Vector3 cameraPosition;
 	Vector3 cameraHorizontal;
 	Vector3 cameraVertical;
