@@ -3,6 +3,7 @@
 #include "AABB.h"
 #include "Sphere.h"
 #include "PointLight.h"
+#include "Triangle.h"
 
 Pixel VecToPixel(Vector3 color)
 {
@@ -24,10 +25,12 @@ void Renderer::Start(Pixel* screenBuffer)
 	Primitive* testSphere = new Sphere(1.0f, Vector3(0.0f, 0.0f, -5.0f), Vector3(1.0f, 1.0f, 1.0f));
 	Primitive* testSphere2 = new Sphere(3.0f, Vector3(-7.0f, 0.0f, -15.0f), Vector3(0.1f, 0.2f, 1.0f));
 	Primitive* testSphere3 = new Sphere(1.5f, Vector3(2.0f, -3.0f, -6.0f), Vector3(0.1f, 1.0f, 0.1f));
-
-	primitives.push_back(testSphere);
-	primitives.push_back(testSphere2);
-	primitives.push_back(testSphere3);
+	Primitive* triangle = new Triangle(Vector3(0.0f, 0.0f, -5.0f), Vector3(2.0f, 0.0f, -5.0f), Vector3(1.0f, 1.5f, -5.0f), Vector3(1.0f, 0.2f, 0.1f));
+	
+	//primitives.push_back(testSphere);
+	//primitives.push_back(testSphere2);
+	//primitives.push_back(testSphere3);
+	primitives.push_back(triangle);
 
 	PointLight* lightWhite = new PointLight(Vector3(0.0f, 4.0f, -5.0f), Vector3(1.0f, 0.5f, 0.0f), 3.0f);
 	PointLight* lightOrange = new PointLight(Vector3(0.0f, 4.0f, -5.0f), Vector3(0.0f, 0.5f, 1.0f), 10.0f);
@@ -38,7 +41,6 @@ void Renderer::Start(Pixel* screenBuffer)
 	renderWidth = ScreenWidth;
 	renderHeight = renderWidth / camera.aspectRatio;
 }
-
 
 std::string cameraTypes[] = 
 {

@@ -158,6 +158,8 @@ float Dot(const Vector2& a, const Vector3& b);
 float Dot(const Vector3& a, const Vector3& b);
 float Dot(const Vector4& a, const Vector4& b);
 
+Vector3 Cross(const Vector3& a, const Vector3& b);
+
 float Clamp(float v, float min, float max);
 
 static_assert(sizeof(Vector2) ==  8, "Vector2 is wrong size.");

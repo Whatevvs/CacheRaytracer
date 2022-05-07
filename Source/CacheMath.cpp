@@ -29,6 +29,14 @@ float Dot(const Vector4& a, const Vector4& b)
 	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w));
 }
 
+Vector3 Cross(const Vector3& a, const Vector3& b)
+{
+	return Vector3(
+		a.y * b.z - a.z * b.y, 
+		a.z * b.x - a.x * b.z, 
+		a.x * b.y - a.y * b.x);
+}
+
 float Clamp(float v, float min, float max)
 {
 	if (v < min) return min;
