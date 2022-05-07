@@ -4,6 +4,24 @@
 Camera::Camera()
 {
 	cameraPosition = Vector3(0.0f, 0.0f, 0.0f);
+	cameraDirection = Vector3(0.0f, 0.0f, 1.0f);
+	UpdateCameraSettings();
+}
+
+void Camera::Debug()
+{
+	ImguiHandler* imgui = ImguiHandler::GetInstance();
+	imgui->CreateWindow("Debug: Camera");
+	imgui->ActivateWindow("Debug: Camera");
+	imgui->SliderVector3("Position", cameraPosition, -10.0f, 10.0f);
+	imgui->SliderFloat("Angle", cameraAngleHorizontal, 0.0f, 360.0f);
+	imgui->DisableWindow();
+
+	float a = cameraAngleHorizontal * DegToRad;
+	float x = cosf(a);
+	float z = sinf(a);
+
+	cameraDirection = Vector3(x, 0.0f, z);
 	UpdateCameraSettings();
 }
 
@@ -19,7 +37,7 @@ void Camera::UpdateCameraSettings()
 
 	cameraHorizontal = Vector3(viewportWidth, 0.0f, 0.0f);
 	cameraVertical = Vector3(0.0f, viewportHeight, 0.0f);
-	lowerLeftCorner = cameraPosition - cameraHorizontal * 0.5f - cameraVertical * 0.5f - Vector3(0.0f, 0.0f, focalLength);
+	lowerLeftCorner = cameraPosition - cameraHorizontal * 0.5f - cameraVertical * 0.5f - cameraDirection;
 }
 
 Ray Camera::GetRay(CameraType type, ScreenPos_UV uv)

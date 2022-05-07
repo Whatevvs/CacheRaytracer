@@ -20,6 +20,7 @@ class Camera
 public:
 	Camera();
 
+	void Debug();
 	void UpdateCameraSettings();
 	Ray GetRay(CameraType type, ScreenPos_UV uv);
 
@@ -37,6 +38,8 @@ public:
 
 
 	Vector3 cameraPosition;
+	Vector3 cameraDirection;
+	float cameraAngleHorizontal = 90.0f;
 	Vector3 cameraHorizontal;
 	Vector3 cameraVertical;
 

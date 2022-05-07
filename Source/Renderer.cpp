@@ -27,9 +27,9 @@ void Renderer::Start(Pixel* screenBuffer)
 	Primitive* testSphere3 = new Sphere(1.5f, Vector3(2.0f, -3.0f, -6.0f), Vector3(0.1f, 1.0f, 0.1f));
 	Primitive* triangle = new Triangle(Vector3(0.0f, 0.0f, -5.0f), Vector3(2.0f, 0.0f, -5.0f), Vector3(1.0f, 1.5f, -7.0f), Vector3(1.0f, 0.2f, 0.1f));
 	
-	//primitives.push_back(testSphere);
-	//primitives.push_back(testSphere2);
-	//primitives.push_back(testSphere3);
+	primitives.push_back(testSphere);
+	primitives.push_back(testSphere2);
+	primitives.push_back(testSphere3);
 	primitives.push_back(triangle);
 
 	PointLight* lightWhite = new PointLight(Vector3(0.0f, 4.0f, -5.0f), Vector3(1.0f, 0.5f, 0.0f), 3.0f);
@@ -116,6 +116,8 @@ void Renderer::Update(float deltaTime)
 			pixel++;
 		}
 	}
+
+	camera.Debug();
 
 	for (int i = 0; i < lightSources.size(); i++)
 	{
