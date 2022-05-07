@@ -25,7 +25,7 @@ void Renderer::Start(Pixel* screenBuffer)
 	Primitive* testSphere = new Sphere(1.0f, Vector3(0.0f, 0.0f, -5.0f), Vector3(1.0f, 1.0f, 1.0f));
 	Primitive* testSphere2 = new Sphere(3.0f, Vector3(-7.0f, 0.0f, -15.0f), Vector3(0.1f, 0.2f, 1.0f));
 	Primitive* testSphere3 = new Sphere(1.5f, Vector3(2.0f, -3.0f, -6.0f), Vector3(0.1f, 1.0f, 0.1f));
-	Primitive* triangle = new Triangle(Vector3(0.0f, 0.0f, -5.0f), Vector3(2.0f, 0.0f, -5.0f), Vector3(1.0f, 1.5f, -5.0f), Vector3(1.0f, 0.2f, 0.1f));
+	Primitive* triangle = new Triangle(Vector3(0.0f, 0.0f, -5.0f), Vector3(2.0f, 0.0f, -5.0f), Vector3(1.0f, 1.5f, -7.0f), Vector3(1.0f, 0.2f, 0.1f));
 	
 	//primitives.push_back(testSphere);
 	//primitives.push_back(testSphere2);

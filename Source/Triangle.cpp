@@ -34,8 +34,8 @@ float Triangle::HasHit(const Ray& ray, float tMin, float tMax, HitRecord& record
 	if (t > epsilon)
 	{
 		record.object = (Primitive*)this;
-		record.t = t;
-		record.hitPoint = ray.At(t);
+		record.t = tMin < t ? tMin : t;
+		record.hitPoint = ray.At(record.t);
 		record.SetFaceNormal(ray, normal);
 		return true;
 	}
